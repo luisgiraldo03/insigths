@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
-import { MyMonitoringService } from './services/logging.service';
-import { NasaService } from './services/nasa.service';
-import { PokemonService } from './services/pokemon.service';
+import { Router } from '@angular/router';
+import { MyMonitoringService } from 'src/app/services/logging.service';
+import { NasaService } from 'src/app/services/nasa.service';
+import { PokemonService } from 'src/app/services/pokemon.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: 'app-page-one',
+  templateUrl: './page-one.component.html',
+  styleUrls: ['./page-one.component.scss']
 })
-export class AppComponent implements OnInit {
+export class PageOneComponent implements OnInit {
 
   public nasaInfo: any = [];
   public pokemons: any = [];
@@ -17,7 +17,11 @@ export class AppComponent implements OnInit {
   constructor(public nasaService: NasaService,
               public pokemonService: PokemonService,
               public myMonitoringService: MyMonitoringService,
-              public router: Router) { }
+              public loggerService: MyMonitoringService,
+              public router: Router) {
+                this.loggerService.logPageView('Page One');
+                this.loggerService.logEvent('EventOne');
+               }
 
   ngOnInit() {
   }
@@ -43,6 +47,4 @@ export class AppComponent implements OnInit {
   public goSecondPage(){
     this.router.navigate(['pageTwo']);
   }
-
-
 }
